@@ -1,13 +1,12 @@
 package az.techblog.demo.services;
 
-import az.techblog.demo.dto.CategoryCreateDto;
-import az.techblog.demo.dto.CategoryDto;
-import az.techblog.demo.dto.CategoryUpdateDto;
+import az.techblog.demo.dto.categoryDtos.CategoryCreateDto;
+import az.techblog.demo.dto.categoryDtos.CategoryDto;
+import az.techblog.demo.dto.categoryDtos.CategoryUpdateDto;
 import az.techblog.demo.models.Category;
 import az.techblog.demo.repositories.CategoryRepository;
 import az.techblog.demo.services.impls.CategoryService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package az.techblog.demo.services.impls;
 
-import az.techblog.demo.dto.CategoryCreateDto;
-import az.techblog.demo.dto.CategoryDto;
-import az.techblog.demo.dto.CategoryUpdateDto;
+import az.techblog.demo.dto.categoryDtos.CategoryCreateDto;
+import az.techblog.demo.dto.categoryDtos.CategoryDto;
+import az.techblog.demo.dto.categoryDtos.CategoryUpdateDto;
 
 import java.util.List;
 

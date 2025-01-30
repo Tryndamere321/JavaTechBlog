@@ -36,8 +36,4 @@ jobs:
   
       - name: Start or Update Spring Boot application with PM2
         run: |
-          pm2 restart spring-boot-app -- -jar /home/backend/actions-runner/_work/nitgaz/nitgaz/target/nitq-0.0.1-SNAPSHOT.jar || pm2 start java --name "spring-boot-app" -- -jar /home/backend/actions-runner/_work/nitgaz/nitgaz/target/nitq-0.0.1-SNAPSHOT.jar
-          cd /path/to/project
-          git pull origin master
-          mvn clean package -DskipTests
-          sudo systemctl restart myapp
+          pm2 restart spring-boot-app -- -jar /home/backend/actions-runner/_work/JavaTechBlog/JavaTechBlog/target/nitq-0.0.1-SNAPSHOT.jar || pm2 start java --name "spring-boot-app" -- -jar /home/backend/actions-runner/_work/JavaTechBlog/JavaTechBlog/target/nitq-0.0.1-SNAPSHOT.jar

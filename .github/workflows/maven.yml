@@ -1,36 +1,42 @@
-name: Java CI/CD with Maven
+name: CI / CD for deployment to server
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
+  build:
+    runs-on: self-hosted
+  
     steps:
-    - name: Kodun klonlanması
-      uses: actions/checkout@v4
-
-    - name: JDK 17 Quraşdırılması
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
-
-    - name: Maven Build
-      run: mvn -B package --file pom.xml
-
-    - name: SSH ilə Serverə Deploy
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.DIGITALOCEAN_IP }}
-        username: ${{ secrets.DIGITALOCEAN_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script: |
+      - name: Checkout repository
+        uses: actions/checkout@v2
+  
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+  
+      # - name: Install Maven
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install maven -y
+  
+      - name: Build with Maven
+        run: mvn clean package --batch-mode --errors --fail-at-end
+  
+#      - name: Install PM2
+#        run: |
+#          npm install -g pm2
+  
+      - name: Start or Update Spring Boot application with PM2
+        run: |
+          pm2 restart spring-boot-app -- -jar /home/backend/actions-runner/_work/nitgaz/nitgaz/target/nitq-0.0.1-SNAPSHOT.jar || pm2 start java --name "spring-boot-app" -- -jar /home/backend/actions-runner/_work/nitgaz/nitgaz/target/nitq-0.0.1-SNAPSHOT.jar
           cd /path/to/project
           git pull origin master
           mvn clean package -DskipTests

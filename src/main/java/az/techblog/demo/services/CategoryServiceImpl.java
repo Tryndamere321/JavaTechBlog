@@ -65,5 +65,10 @@ public class CategoryServiceImpl implements CategoryService {
         return modelMapper.map(category,CategoryUpdateDto.class);
     }
 
+    @Override
+    public Category findCategoryById(Long id) {
+        return categoryRepository.findById(id).orElseThrow();
+    }
+
 
 }
